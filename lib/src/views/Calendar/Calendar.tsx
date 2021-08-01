@@ -13,6 +13,7 @@ import { IconButtonProps } from '@material-ui/core/IconButton';
 import { withStyles, WithStyles } from '@material-ui/core/styles';
 import { findClosestEnabledDate } from '../../_helpers/date-utils';
 import { withUtils, WithUtilsProps } from '../../_shared/WithUtils';
+import { DateTime } from 'luxon';
 
 export interface OutterCalendarProps {
   /** Left arrow icon */
@@ -264,12 +265,18 @@ export class Calendar extends React.Component<CalendarProps, CalendarState> {
       const disabled = this.shouldDisableDate(day);
       const isDayInCurrentMonth = utils.getMonth(day) === currentMonthNumber;
 
+      // utils.format(selectedDate, 'fullDate') does a really weird date time span format
+      // assuming Luxon DateTime for now for better formatting
+      // (probably due to luxon / date-io version mismatch)
+      const accessibilityDate = (day as DateTime).toISODate();
+
       let dayComponent = (
         <Day
           disabled={disabled}
           current={utils.isSameDay(day, now)}
           hidden={!isDayInCurrentMonth}
           selected={utils.isSameDay(selectedDate, day)}
+          ariaLabel={accessibilityDate}
         >
           {utils.getDayText(day)}
         </Day>

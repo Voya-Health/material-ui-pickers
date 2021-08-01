@@ -9,8 +9,7 @@
   },
   "private": true,
   "workspaces": [
-    "lib",
-    "docs"
+    "lib"
   ],
   "scripts": {
     "start": "yarn dev",

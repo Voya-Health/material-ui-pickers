@@ -1,5 +1,6 @@
 node-modules/
 build/
+dist/
 coverage/
 *.mp4
 .next

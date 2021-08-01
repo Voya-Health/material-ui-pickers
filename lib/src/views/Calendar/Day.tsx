@@ -51,6 +51,7 @@ export interface DayProps {
   hidden?: boolean;
   /** Selected? */
   selected?: boolean;
+  ariaLabel?: string;
 }
 
 export const Day: React.FC<DayProps> = ({
@@ -59,6 +60,7 @@ export const Day: React.FC<DayProps> = ({
   hidden,
   current,
   selected,
+  ariaLabel,
   ...other
 }) => {
   const classes = useStyles();
@@ -71,7 +73,12 @@ export const Day: React.FC<DayProps> = ({
   });
 
   return (
-    <IconButton className={className} tabIndex={hidden || disabled ? -1 : 0} {...other}>
+    <IconButton
+      className={className}
+      tabIndex={hidden || disabled ? -1 : 0}
+      aria-label={ariaLabel}
+      {...other}
+    >
       <Typography variant="body2" color="inherit">
         {children}
       </Typography>
